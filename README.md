@@ -39,11 +39,12 @@ int main() {
     clip::register_format("com.appname.FormatName");
 
   int value = 32;
+  std::string str = "Alternative text for value 32";
 
   clip::lock l;
   l.clear();
-  l.set_data(clip::text_format(), "Alternative text for value 32");
-  l.set_data(my_format, &value, sizeof(int));
+  l.set_data(clip::text_format(), str.c_str(), str.size());
+  l.set_data(my_format, (const char*)&value, sizeof(int));
 }
 ```
 
@@ -54,7 +55,7 @@ int main() {
   change depending on the platform (e.g. `size_t`) in your custom
   format data.
 * **Windows**:
-  - [Limited number of clipboard formats on Windows](http://blogs.msdn.com/b/oldnewthing/archive/2015/03/19/10601208.aspx)
+  - [Limited number of clipboard formats on Windows](https://web.archive.org/web/20250126161802/https://devblogs.microsoft.com/oldnewthing/20080430-00/?p=22523)
 * **Linux**:
   - To be able to copy/paste on Linux you need `libx11-dev`/`libX11-devel` package.
   - To copy/paste images you will need `libpng-dev`/`libpng-devel` package.
